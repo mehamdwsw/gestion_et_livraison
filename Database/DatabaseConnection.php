@@ -1,13 +1,12 @@
 <?php
 class Database
 {
-    private $db = "school";
+    private $db = "gestion_livraison";
     private $server = "localhost";
     private $password = "";
     private $user = "root";
 
     private $pdo;
-    
     public function connect()
     {
         try {

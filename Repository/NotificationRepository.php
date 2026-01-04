@@ -1,5 +1,5 @@
 <?php
-class UserRepository extends database implements CrudInterface
+class NotificationRepository extends database implements CrudInterface
 {
     private $db;
     function __construct()
@@ -20,7 +20,7 @@ class UserRepository extends database implements CrudInterface
         return $test;
     }
 
-    public function read(int $id): ?object
+    public function readid(int $id): ?object
     {
         $sql = "SELECT * FROM users WHERE id = '$id'";
         $stmt = $this->db->prepare($sql);
@@ -29,7 +29,7 @@ class UserRepository extends database implements CrudInterface
         return $user?:null;
     }
 
-    public function update(object $entity): bool
+    public function update(object $entity, $id): bool
     {
         $name = $entity->getname();
         $email = $entity->getemail();

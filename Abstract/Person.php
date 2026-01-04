@@ -1,35 +1,28 @@
 
 <?php
-class Person
+abstract class Person
 {
-    private $id;
-    private $name;
-    private $password;
-    private $email;
+    private  $id;
+    private  $nom;
+    private  $email;
+    private  $password;
+    private  $role;
 
-    function __construct($name,$email,$pass)
+    function __construct($nom, $email, $password, $role)
     {
-        $this->name = $name;
-        $this->password = $pass;;
-        $this->email = $email;
+        $this->nom = $nom;
+        $this->email = $email;;
+        $this->password = $password;
+        $this->role = $role;
     }
-    public function getId()
+    public function getRole()
     {
-        return $this->id;
+        return $this->role;
     }
-    public function setId($id)
+    public function setRole($role)
     {
-        $this->id = $id;
+        $this->role = $role;
 
-        return $this;
-    }
-    public function getName()
-    {
-        return $this->name;
-    }
-    public function setName($name)
-    {
-        $this->name = $name;
         return $this;
     }
     public function getPassword()
@@ -39,15 +32,27 @@ class Person
     public function setPassword($password)
     {
         $this->password = $password;
+
         return $this;
-    }
+    } 
     public function getEmail()
     {
         return $this->email;
-    }
+    } 
     public function setEmail($email)
     {
         $this->email = $email;
+
+        return $this;
+    } 
+    public function getNom()
+    {
+        return $this->nom;
+    }
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
         return $this;
     }
 }

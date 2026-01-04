@@ -1,5 +1,5 @@
 <?php
-class descriptionRepository extends database implements CrudInterface
+class CommandeRepository extends database implements CrudInterface
 {
     private $db;
     function __construct()
@@ -12,12 +12,12 @@ class descriptionRepository extends database implements CrudInterface
         return true;
     }
 
-    public function read(int $id): ?object
+    public function readid(int $id): ?object
     {
         return $this->db;
     }
 
-    public function update(object $entity): bool
+    public function update(object $entity, $id): bool
     {
         return true;
     }
