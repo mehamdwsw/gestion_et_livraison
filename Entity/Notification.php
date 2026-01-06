@@ -5,10 +5,9 @@ class Notification
     private $is_read;
     private $user_id;
 
-    function __construct($message, $is_read, $user_id)
+    function __construct($message, $user_id)
     {
         $this->message = $message;
-        $this->is_read = $is_read;
         $this->user_id = $user_id;
     }
     public function getUser_id()
@@ -44,8 +43,7 @@ class Notification
     public function toString()
     {
         return  " =>| message: " . $this->getmessage() . "<br>" .
-                " =>| is_read: " . $this->getis_read() . "<br>" .
-                " =>| user_id: " . $this->getuser_id() . "<br>" ;
-            
+            " =>| is_read: " . $this->getis_read() . "<br>" .
+            " =>| user_id: " . $this->getuser_id() . "<br>";
     }
 }

@@ -1,5 +1,5 @@
 <?php
-class ClientRepository extends database implements CrudInterface
+class ClientRepository extends database
 {
     private $db;
     function __construct()
@@ -8,7 +8,7 @@ class ClientRepository extends database implements CrudInterface
         $this->db = $this->connect();
     }
 
-    public function create(object $entity): bool
+    public function create(object $entity)
     {
         $name = $entity->getnom();
         $email = $entity->getEmail();
@@ -17,7 +17,8 @@ class ClientRepository extends database implements CrudInterface
         $sql = "INSERT INTO users (`nom`, `email`, `password`,`role`) VALUES (?,?,?,?)";
         $stmt = $this->db->prepare($sql);
         $test = $stmt->execute([$name, $email, $password, $role]);
-        return $test;
+        $Id = $this->db->lastInsertId();
+        return $Id;
     }
 
     public function readid(int $id): ?object

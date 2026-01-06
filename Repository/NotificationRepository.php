@@ -1,5 +1,5 @@
 <?php
-class NotificationRepository extends database implements CrudInterface
+class NotificationRepository extends database 
 {
     private $db;
     function __construct()
@@ -9,47 +9,38 @@ class NotificationRepository extends database implements CrudInterface
     }
     public function create(object $entity): bool
     {
-        $name = $entity->getname();
-        $email = $entity->getemail();
-        $password = $entity->getpassword();
+        $message = $entity->getname();
+        $user_id = $entity->getemail();
         $role = $entity->getrole();
-        $sql = "INSERT INTO users (name, email, password,role) VALUES ('$name','$email','$password','$role')";
-
+        $sql = "INSERT INTO notification (message, user_id) VALUES (?,?)";
         $stmt = $this->db->prepare($sql);
-        $test = $stmt->execute();
+        $test = $stmt->execute([$message, $user_id]);
         return $test;
     }
 
-    public function readid(int $id): ?object
+    public function user_notification(int $id): ?array
     {
-        $sql = "SELECT * FROM users WHERE id = '$id'";
+        $sql = "SELECT * FROM notification WHERE user_id = '$id';";
         $stmt = $this->db->prepare($sql);
         $test = $stmt->execute();
-        $user=$stmt->fetch(PDO::FETCH_OBJ);
-        return $user?:null;
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $user ?: null;
     }
 
-    public function update(object $entity, $id): bool
+    public function read($id): bool
     {
-        $name = $entity->getname();
-        $email = $entity->getemail();
-        $password = $entity->getpassword();
-        $role = $entity->getrole();
-        $sql = "INSERT INTO users (name, email, password,role) VALUES ('$name','$email','$password','$role')";
-
+        $is_read=1;
+        $sql = "UPDATE notification SET `is_read` = ? WHERE `id` = ?;";
         $stmt = $this->db->prepare($sql);
-        $test = $stmt->execute();
+        $test = $stmt->execute([$is_read,$id]);
         return $test;
-        return true;
     }
 
     public function delete(int $id): bool
     {
-        return true;
-    }
-
-    public function listAll(): array
-    {
-        return [];
+        $sql = "DELETE FROM notification WHERE `id` = ?;";
+        $stmt = $this->db->prepare($sql);
+        $test = $stmt->execute([$id]);
+        return $test;
     }
 }

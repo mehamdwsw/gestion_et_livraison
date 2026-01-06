@@ -9,47 +9,56 @@ class OffreRepository extends database implements CrudInterface
     }
     public function create(object $entity): bool
     {
-        $name = $entity->getname();
-        $email = $entity->getemail();
-        $password = $entity->getpassword();
-        $role = $entity->getrole();
-        $sql = "INSERT INTO users (name, email, password,role) VALUES ('$name','$email','$password','$role')";
+        $prix = $entity->getprix();
+        $duree = $entity->getduree();
+        $vehicule = $entity->getvehicule();
+        $options = $entity->getoptions();
+        $commande_id = $entity->getcommande_id();
+        $livreur_id = $entity->getlivreur_id();
+        $sql = "INSERT INTO offre (`prix`, `duree`, `vehicule`,`options`,`commande_id`,`livreur_id`) VALUES (?,?,?,?,?,?);";
 
         $stmt = $this->db->prepare($sql);
-        $test = $stmt->execute();
+        $test = $stmt->execute([$prix, $duree, $vehicule, $options, $commande_id, $livreur_id]);
         return $test;
     }
 
     public function readid(int $id): ?object
     {
-        $sql = "SELECT * FROM users WHERE id = '$id'";
+        $sql = "SELECT * FROM offre WHERE id = '$id'";
         $stmt = $this->db->prepare($sql);
         $test = $stmt->execute();
-        $user=$stmt->fetch(PDO::FETCH_OBJ);
-        return $user?:null;
+        $user = $stmt->fetch(PDO::FETCH_OBJ);
+        return $user ?: null;
     }
 
     public function update(object $entity, $id): bool
     {
-        $name = $entity->getname();
-        $email = $entity->getemail();
-        $password = $entity->getpassword();
-        $role = $entity->getrole();
-        $sql = "INSERT INTO users (name, email, password,role) VALUES ('$name','$email','$password','$role')";
-
+        $prix = $entity->getprix();
+        $duree = $entity->getduree();
+        $vehicule = $entity->getvehicule();
+        $options = $entity->getoptions();
+        $commande_id = $entity->getcommande_id();
+        $livreur_id = $entity->getlivreur_id();
+        $sql = "UPDATE offre SET `prix` = ?, `duree` = ?, `vehicule` = ?, `options` = ? ,`commande_id` = ?,`livreur_id` = ? WHERE `id` = ?;";
         $stmt = $this->db->prepare($sql);
-        $test = $stmt->execute();
+        $test = $stmt->execute([$prix, $duree, $vehicule, $options, $commande_id, $livreur_id, $id]);
         return $test;
-        return true;
     }
 
     public function delete(int $id): bool
     {
+        $sql = "DELETE FROM offre WHERE `id` = ?;";
+        $stmt = $this->db->prepare($sql);
+        $test = $stmt->execute([$id]);
+        return $test;
         return true;
     }
 
     public function listAll(): array
     {
-        return [];
+        $sql = "SELECT * FROM offre;";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

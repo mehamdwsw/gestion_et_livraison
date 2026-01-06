@@ -31,7 +31,7 @@
                 <p class="text-muted">Gérez vos livraisons en toute simplicité</p>
             </div>
             <div class="card login-card p-4">
-                <form id="loginForm">
+                <form id="loginForm" method="post" action="">
                     <div class="mb-3">
                         <label class="form-label text-secondary">Adresse Email</label>
                         <div class="input-group">
@@ -49,7 +49,7 @@
                     <button type="submit" class="btn btn-primary w-100 fw-bold mb-3">Se connecter</button>
                     <div class="text-center">
                         <span class="text-muted small">Nouveau sur LivraEase ?</span>
-                        <a href="register.html" class="text-decoration-none small fw-bold">Créer un compte</a>
+                        <a href="register.php" class="text-decoration-none small fw-bold">Créer un compte</a>
                     </div>
                 </form>
             </div>

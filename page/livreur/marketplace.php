@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +8,32 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { background-color: #f0f2f5; }
-        .navbar { background-color: #1a202c; }
-        .card-order { border: none; border-radius: 15px; transition: transform 0.2s; shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .card-order:hover { transform: translateY(-5px); }
-        .btn-offer { border-radius: 10px; font-weight: bold; }
+        body {
+            background-color: #f0f2f5;
+        }
+
+        .navbar {
+            background-color: #1a202c;
+        }
+
+        .card-order {
+            border: none;
+            border-radius: 15px;
+            transition: transform 0.2s;
+            shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-order:hover {
+            transform: translateY(-5px);
+        }
+
+        .btn-offer {
+            border-radius: 10px;
+            font-weight: bold;
+        }
     </style>
 </head>
+
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
@@ -104,4 +124,5 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
