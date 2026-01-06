@@ -1,4 +1,7 @@
 <?php
+
+namespace gestion_et_livraison\Interface;
+
 interface CrudInterface {
     public function create(object $entity): bool;
 

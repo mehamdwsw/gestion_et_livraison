@@ -1,10 +1,15 @@
 <?php
-class NotificationRepository extends database 
+
+namespace gestion_et_livraison\Repository;
+use PDO;
+use gestion_et_livraison\Database\Database;
+
+class NotificationRepository extends Database 
 {
     private $db;
     function __construct()
     {
-        $db = new database();
+        $db = new Database();
         $this->db = $db->connect();
     }
     public function create(object $entity): bool

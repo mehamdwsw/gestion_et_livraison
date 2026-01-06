@@ -31,19 +31,35 @@
                 <p class="text-muted">Gérez vos livraisons en toute simplicité</p>
             </div>
             <div class="card login-card p-4">
-                <form id="loginForm" method="post" action="">
+                <?php
+                    session_start();
+                
+                    
+
+                    if ($_SESSION == null) {
+                    } else {
+                        if ($_SESSION['error'] == 'yes') {
+                            echo "<div class='alert alert-danger' role='alert'>
+                                        L'adresse email n'est pas valide.
+                                  </div>";
+                        } else {
+                        }
+                    }
+                    $_SESSION['error'] = 'no';
+                    ?>
+                <form id="loginForm" method="post" action="../../Service/Check_action_login.php">
                     <div class="mb-3">
                         <label class="form-label text-secondary">Adresse Email</label>
                         <div class="input-group">
                             <span class="input-group-text bg-light border-end-0"><i class="fas fa-envelope text-muted"></i></span>
-                            <input type="email" class="form-control bg-light border-start-0" id="email" placeholder="nom@exemple.com" required>
+                            <input name="email" type="text" class="form-control bg-light border-start-0" id="email" placeholder="nom@exemple.com" required>
                         </div>
                     </div>
                     <div class="mb-4">
                         <label class="form-label text-secondary">Mot de passe</label>
                         <div class="input-group">
                             <span class="input-group-text bg-light border-end-0"><i class="fas fa-lock text-muted"></i></span>
-                            <input type="password" class="form-control bg-light border-start-0" id="password" required>
+                            <input name="passe" type="password" class="form-control bg-light border-start-0" id="password" required>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary w-100 fw-bold mb-3">Se connecter</button>
@@ -59,12 +75,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        // هنا سيتم الربط لاحقاً مع الـ Service الخاص بك
-        console.log("Tentative de connexion...");
-        window.location.href = "../client/dashboard.html"; // مثال للتحويل
-    });
+
 </script>
 </body>
 </html>

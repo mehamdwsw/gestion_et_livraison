@@ -2,6 +2,6 @@
 
 namespace gestion_et_livraison\Service;
 
-class hy{
+class HYTR{
     public $lol='lol';
 }

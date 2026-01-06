@@ -1,4 +1,8 @@
 <?php
+
+namespace gestion_et_livraison\Database;
+use PDO;
+use PDOException;
 class Database
 {
     private $db = "gestion_livraison";

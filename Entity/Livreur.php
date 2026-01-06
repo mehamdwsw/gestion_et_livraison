@@ -1,4 +1,9 @@
 <?php
+
+namespace gestion_et_livraison\Entity;
+
+use gestion_et_livraison\Abstract\Person;
+
 class Livreur extends Person
 {
     

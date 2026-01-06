@@ -1,4 +1,14 @@
 <?php
+
+namespace gestion_et_livraison\Service;
+
+use gestion_et_livraison\Entity\Client;
+use gestion_et_livraison\Entity\Livreur;
+use gestion_et_livraison\Database\Database;
+use gestion_et_livraison\Interface\CrudInterface;
+use gestion_et_livraison\Repository\ClientRepository;
+use gestion_et_livraison\Repository\LivreurRepository;
+
 class formulaire_input
 {
     public static function add_Client($POST)

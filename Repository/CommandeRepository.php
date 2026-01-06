@@ -1,10 +1,16 @@
 <?php
-class CommandeRepository extends database implements CrudInterface
+
+namespace gestion_et_livraison\Repository;
+
+use gestion_et_livraison\Database\Database;
+use gestion_et_livraison\Interface\CrudInterface;
+use PDO;
+class CommandeRepository extends Database implements CrudInterface
 {
     private $db;
     function __construct()
     {
-        $db = new database();
+        $db = new Database();
         $this->db = $db->connect();
     }
     public function create(object $entity): bool

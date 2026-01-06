@@ -1,4 +1,7 @@
 <?php
+
+namespace gestion_et_livraison\Entity;
+
 class Notification
 {
     private $message;

@@ -1,9 +1,15 @@
 <?php
-class AdminRepository extends database implements CrudInterface{
+
+namespace gestion_et_livraison\Repository;
+use PDO;
+use gestion_et_livraison\Database\Database;
+use gestion_et_livraison\Interface\CrudInterface;
+
+class AdminRepository extends Database implements CrudInterface{
     private $db;
     function __construct()
     {
-        $db=new database();
+        $db=new Database();
         $this->db=$db->connect();
     }
 

@@ -1,5 +1,10 @@
 <?php
-class ClientRepository extends database
+
+namespace gestion_et_livraison\Repository;
+use PDO;
+use gestion_et_livraison\Database\Database;
+
+class ClientRepository extends Database
 {
     private $db;
     function __construct()

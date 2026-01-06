@@ -1,6 +1,8 @@
-
 <?php
- class Person
+
+namespace gestion_et_livraison\Abstract;
+
+class Person
 {
     private  $id;
     private  $nom;

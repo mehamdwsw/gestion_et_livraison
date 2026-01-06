@@ -47,7 +47,7 @@
                     $_SESSION['error'] = "no";
                     ?>
 
-                    <form id="registerForm" method="post" action="../../Service/Check_action.php">
+                    <form id="registerForm" method="post" action="../../Service/Check_action_register.php">
                         <div class="row">
                             <div class="col-md-12 mb-3">
                                 <label class="form-label">Nom complet</label>
