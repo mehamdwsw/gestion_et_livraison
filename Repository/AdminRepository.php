@@ -1,9 +1,9 @@
 <?php
 
-namespace gestion_et_livraison\Repository;
+namespace Repository;
 use PDO;
-use gestion_et_livraison\Database\Database;
-use gestion_et_livraison\Interface\CrudInterface;
+use Database\Database;
+use Interface\CrudInterface;
 
 class AdminRepository extends Database implements CrudInterface{
     private $db;
@@ -62,4 +62,29 @@ class AdminRepository extends Database implements CrudInterface{
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function verify_users($id)
+    {
+        $Check_role="YES";
+        $sql = "UPDATE users SET `Check_role` = ? WHERE `id` = ?;";
+        $stmt = $this->db->prepare($sql);
+        $test = $stmt->execute([$Check_role,$id]);
+        return $test;
+    }
+    public function active_account($id)
+    {
+        $is_active=1;
+        $sql = "UPDATE users SET `is_active` = ? WHERE `id` = ?;";
+        $stmt = $this->db->prepare($sql);
+        $test = $stmt->execute([$is_active,$id]);
+        return $test;
+    }
+    public function blok_account($id)
+    {
+        $is_active=0;
+        $sql = "UPDATE users SET `is_active` = ? WHERE `id` = ?;";
+        $stmt = $this->db->prepare($sql);
+        $test = $stmt->execute([$is_active,$id]);
+        return $test;
+    }
+   
 }

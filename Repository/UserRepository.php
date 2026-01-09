@@ -1,8 +1,8 @@
 <?php
 
-namespace gestion_et_livraison\Repository;
+namespace Repository;
 use PDO;
-use gestion_et_livraison\Database\Database;
+use Database\Database;
 
 class UserRepository extends Database
 {
@@ -27,19 +27,17 @@ class UserRepository extends Database
         }
     
     }
-    // public function login($post): bool
-    // {
-    //     $email = $post['email'];
-    //     $passe = $post['passe'];
+    public function Check_role($post)
+    {
+        $email = $post['email'];
+        $passe = $post['passe'];
         
-    //     $sql = "SELECT * FROM users WHERE email = ? and password=?;";
-    //     $stmt = $this->db->prepare($sql);
-    //     $stmt->execute([$email,$passe]);
-    //     if ($stmt->fetchAll(PDO::FETCH_ASSOC)) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    
-    // }
+        $sql = "SELECT * FROM users WHERE email = ? and password=?;";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$email,$passe]);
+        $lol=$stmt->fetchObject();
+        
+            return $lol;
+       
+    }
 }

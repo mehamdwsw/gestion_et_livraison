@@ -1,8 +1,8 @@
 <?php
 
-namespace gestion_et_livraison\Repository;
+namespace Repository;
 use PDO;
-use gestion_et_livraison\Database\Database;
+use Database\Database;
 
 class NotificationRepository extends Database 
 {

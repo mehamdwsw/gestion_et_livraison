@@ -1,6 +1,6 @@
 <?php
 
-namespace gestion_et_livraison\Database;
+namespace Database;
 use PDO;
 use PDOException;
 class Database

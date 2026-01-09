@@ -1,9 +1,9 @@
 <?php
 
-namespace gestion_et_livraison\Repository;
+namespace Repository;
 
-use gestion_et_livraison\Database\Database;
-use gestion_et_livraison\Interface\CrudInterface;
+use Database\Database;
+use Interface\CrudInterface;
 use PDO;
 class CommandeRepository extends Database implements CrudInterface
 {

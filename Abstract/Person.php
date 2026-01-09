@@ -1,6 +1,6 @@
 <?php
 
-namespace gestion_et_livraison\Abstract;
+namespace Abstract;
 
 class Person
 {

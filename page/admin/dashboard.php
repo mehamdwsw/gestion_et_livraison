@@ -1,0 +1,275 @@
+<?php
+
+namespace page\admin;
+
+use Repository\AdminRepository;
+
+session_start();
+// var_dump($_SESSION);
+if (empty($_SESSION['Admin'])) {
+    header("Location:../auth/login.php");
+}
+include_once("../../vendor/autoload.php");
+
+$AdminRepository = new AdminRepository();
+$data = $AdminRepository->listAll();
+// var_dump($data[0]);
+?>
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LivraEase Admin - Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --admin-primary: #1e293b;
+            --admin-accent: #3b82f6;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .navbar-admin {
+            background-color: var(--admin-primary);
+        }
+
+        .stat-card {
+            border: none;
+            border-radius: 15px;
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .status-toggle {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-admin shadow-sm mb-4">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#"><i class="fas fa-shield-alt me-2 text-info"></i>LivraEase Admin</a>
+            <a class="navbar-brand fs-6 text" href="verify_users.php">Vérification Utilisateurs</a>
+            <div class="navbar-nav ms-auto">
+                <button class="btn btn-outline-light btn-sm" onclick="exportData()"><i class="fas fa-file-csv me-2"></i>Exporter CSV</button>
+                <a class="nav-link text-danger ms-3" href="../../Service/logout.php"><i class="fas fa-power-off"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container pb-5">
+        <h4 class="fw-bold mb-4 text-secondary">Supervision Globale</h4>
+        <div class="row g-4 mb-5">
+            <div class="col-md-3">
+                <div class="card stat-card shadow-sm p-3 border-start border-primary border-5">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <p class="text-muted small mb-1">Commandes Totales</p>
+                            <h3 class="fw-bold">0</h3>
+                        </div>
+                        <div class="text-primary fs-2"><i class="fas fa-shopping-basket"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card shadow-sm p-3 border-start border-success border-5">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <p class="text-muted small mb-1">Terminées</p>
+                            <h3 class="fw-bold text-success">0</h3>
+                        </div>
+                        <div class="text-success fs-2"><i class="fas fa-check-double"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card shadow-sm p-3 border-start border-danger border-5">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <p class="text-muted small mb-1">Annulées</p>
+                            <h3 class="fw-bold text-danger">0</h3>
+                        </div>
+                        <div class="text-danger fs-2"><i class="fas fa-times-circle"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card shadow-sm p-3 border-start border-info border-5">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <p class="text-muted small mb-1">Livreurs Actifs</p>
+                            <h3 class="fw-bold text-info">0</h3>
+                        </div>
+                        <div class="text-info fs-2"><i class="fas fa-biking"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="fw-bold text-secondary">Gestion des Utilisateurs</h4>
+            <div class="input-group w-25 shadow-sm">
+                <span class="input-group-text bg-white border-end-0"><i class="fas fa-search text-muted"></i></span>
+                <input type="text" class="form-control border-start-0" placeholder="Rechercher...">
+            </div>
+        </div>
+
+        <div class="table-container shadow-sm">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Utilisateur</th>
+                        <th>Email</th>
+                        <th>Rôle</th>
+                        <th>Date Inscription</th>
+                        <th>État</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                    <!-- ------------------------------------------------- -->
+                    <?php
+                    $staus = "";
+                    foreach ($data as $aray) {
+                        echo $td = "<td>
+                            <div class='d-flex align-items-center'>
+                                <div class='bg-secondary rounded-circle p-2 text-white me-2 small'>{$aray['nom'][0]}{$aray['nom'][1]}</div>
+                                <span class='fw-bold'>" . "{$aray['nom']}" . "</span>
+                            </div>
+                        </td>
+                        <td>{$aray['email']}</td>    
+                        <td><span class='badge bg-primary-subtle text-primary border'>{$aray['role']}</span></td>
+                        <td>{$aray['user_date']}</td>
+                        ";
+                        if ($aray['is_active']) {
+                            $staus = "checked";
+                        } else {
+                            $staus = "";
+                        }
+                        echo "<td>
+                            <form class='form-check form-switch'>
+                                <input id='form-check' class='form-check-input' {$staus} value='{$aray['is_active']}' type='checkbox'onchange='toggleUserStatus({$aray['id']},{$aray['is_active']})'>
+                                <label class='form-check-label small text-success'>Actif</label>
+                            </form>
+                        </td>
+                        <td class='text-end'>
+                            <button class='btn btn-sm btn-light border' data-bs-toggle='modal' data-bs-target='#editRoleModal'>
+                                <i class='fas fa-user-tag me-1 text-secondary'></i> Rôle
+                            </button>
+                        </td>
+                    </tr>";
+                    }
+
+
+
+
+                    ?>
+                    <!-- <td>
+                        <div class="d-flex align-items-center">
+                            <div class="bg-secondary rounded-circle p-2 text-white me-2 small">YB</div>
+                            <span class="fw-bold">Yassine Benali</span>
+                        </div>
+                    </td>
+                    <td>yassine@example.com</td>
+                    <td><span class="badge bg-primary-subtle text-primary border">Livreur</span></td>
+                    <td>28/12/2025</td>
+                    <td>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input status-toggle" type="checkbox" checked onchange="toggleUserStatus(ORD-1)">
+                            <label class="form-check-label small text-success">Actif</label>
+                        </div>
+                    </td>
+                    <td class="text-end">
+                        <button class="btn btn-sm btn-light border" data-bs-toggle="modal" data-bs-target="#editRoleModal">
+                            <i class="fas fa-user-tag me-1 text-secondary"></i> Rôle
+                        </button>
+                    </td>
+                    </tr>
+                    <tr> -->
+
+                    <!-- ------------------------------------------------- -->
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editRoleModal" tabindex="-1">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header border-0 bg-light">
+                    <h6 class="modal-title fw-bold">Modifier le Rôle</h6>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <select class="form-select mb-3">
+                        <option value="client">Client</option>
+                        <option value="livreur">Livreur</option>
+                        <option value="admin">Administrateur</option>
+                    </select>
+                    <button class="btn btn-primary w-100 fw-bold">Appliquer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="test" class="">
+
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function toggleUserStatus(id, value) {
+            // alert("Action US-A02: Statut de l'utilisateur " + id + " modifié.");
+
+            if (value==1) {
+                document.getElementById("test").innerHTML =
+                    `
+                <form class="form-check" action="../../Service/no_active.php"  method="post">
+                <input class="form-check-input status-toggle" name="id" value="${id}" type="text">
+                <button  id="button_tr" class="btn">sand</button>
+                </form>
+                console.log(value);
+                
+                // `
+                document.getElementById("button_tr").click();
+            } else {
+                document.getElementById("test").innerHTML =
+                    `
+                <form class="form-check" action="../../Service/yse_active.php"  method="post">
+                <input class="form-check-input status-toggle" name="id" value="${id}" type="text">
+                <button  id="button_tr" class="btn">sand</button>
+                </form>
+                `
+                document.getElementById("button_tr").click();
+            }
+
+
+        }
+
+
+        function exportData() {
+            alert("Action US-B06: Statistiques exportées au format CSV.");
+        }
+    </script>
+</body>
+
+</html>

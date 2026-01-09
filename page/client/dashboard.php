@@ -41,7 +41,7 @@
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
                 <li><a class="dropdown-item" href="#">Paramètres</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item text-danger" href="../auth/login.html">Déconnexion</a></li>
+                <li><a class="dropdown-item text-danger" href="../../Service/logout.php">Déconnexion</a></li>
             </ul>
         </div>
     </div>

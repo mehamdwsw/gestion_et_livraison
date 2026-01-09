@@ -1,0 +1,13 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Abstract\\":"Abstract",
+            "Database\\":"Database",
+            "Entity\\":"Entity",
+            "Interface\\":"Interface",
+            "Repository\\":"Repository",
+            "Service\\":"Service",
+            "Tols\\":"Tols"
+        }
+    }
+}

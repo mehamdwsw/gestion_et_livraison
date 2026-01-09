@@ -1,8 +1,6 @@
 <?php
-
-namespace gestion_et_livraison\Entity;
-
-use gestion_et_livraison\Abstract\Person;
+namespace Entity;
+use Abstract\Person;
 
 class Client extends Person
 {

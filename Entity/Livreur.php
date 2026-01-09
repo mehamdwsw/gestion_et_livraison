@@ -1,8 +1,8 @@
 <?php
 
-namespace gestion_et_livraison\Entity;
+namespace Entity;
 
-use gestion_et_livraison\Abstract\Person;
+use Abstract\Person;
 
 class Livreur extends Person
 {

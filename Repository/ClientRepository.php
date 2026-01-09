@@ -1,8 +1,8 @@
 <?php
+namespace Repository;
 
-namespace gestion_et_livraison\Repository;
 use PDO;
-use gestion_et_livraison\Database\Database;
+use Database\Database;
 
 class ClientRepository extends Database
 {
@@ -17,6 +17,7 @@ class ClientRepository extends Database
     {
         $name = $entity->getnom();
         $email = $entity->getEmail();
+        echo"";
         $password = $entity->getPassword();
         $role = $entity->getrole();
         $sql = "INSERT INTO users (`nom`, `email`, `password`,`role`) VALUES (?,?,?,?)";

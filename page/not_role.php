@@ -1,8 +1,10 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php
+include_once("../vendor/autoload.php");
+use Tols\Request;
+ Request::Method_test();
+
+
+?>
     <title>بانتظار الموافقة</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
@@ -92,7 +94,7 @@
             <button onclick="window.location.reload();" class="btn btn-refresh">
                 تحديث الحالة
             </button>
-            <a href="logout.php" class="btn-logout">تسجيل الخروج</a>
+            <a href="../Service/logout.php" class="btn-logout">تسجيل الخروج</a>
         </div>
     </div>
 
